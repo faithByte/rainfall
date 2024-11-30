@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -5,7 +6,6 @@
 int main(int ac, char **av) {
 	int		nbr = atoi(av[1]);
 	char	*args[] = { "/usr/bin/sh", NULL };
-	char	*env[] = { NULL };
 	gid_t	egid;
 	uid_t	euid;
 
@@ -16,7 +16,7 @@ int main(int ac, char **av) {
 		euid = geteuid();
         setresgid(egid, egid, egid);
         setresuid(euid, euid, euid);
-		execve(args[0], args, env);
+		execve(args[0], args, NULL);
 		perror("execve");
 	}
 	
