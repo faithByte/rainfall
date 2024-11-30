@@ -4,11 +4,10 @@
 
 int main(int ac, char **av) {
 	int		nbr = atoi(av[1]);
+	char	*args[] = { "/usr/bin/sh", NULL };
+	char	*env[] = { NULL };
 	gid_t	egid;
 	uid_t	euid;
-
-    char *args[] = { "/usr/bin/sh", NULL };
-    char *env[] = { NULL };
 
 	if (nbr != 423)
 		printf("No !\n");
@@ -19,6 +18,7 @@ int main(int ac, char **av) {
         setresuid(euid, euid, euid);
 		execve(args[0], args, env);
 		perror("execve");
-		exit(0);
 	}
+	
+	return (0);
 }
